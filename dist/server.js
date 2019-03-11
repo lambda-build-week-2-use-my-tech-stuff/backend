@@ -19,6 +19,10 @@ var _db = require("./utils/db");
 
 var _post = _interopRequireDefault(require("./resources/post/post.router"));
 
+var _user = _interopRequireDefault(require("./resources/user/user.router"));
+
+var _auth = require("./utils/auth");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const app = (0, _express.default)();
@@ -30,7 +34,11 @@ app.use((0, _bodyParser.urlencoded)({
   extended: true
 }));
 app.use((0, _morgan.default)('dev'));
+app.post('/signup', _auth.signup);
+app.post('signin', _auth.signin);
+app.use('/api', _auth.protect);
 app.use('/api/post', _post.default);
+app.use('api/user', _user.default);
 
 const start = async () => {
   try {
