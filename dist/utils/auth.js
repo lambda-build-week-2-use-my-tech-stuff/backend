@@ -35,7 +35,7 @@ exports.verifyToken = verifyToken;
 const signup = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({
-      message: "need email and password"
+      message: 'need email and password'
     });
   }
 
@@ -55,18 +55,18 @@ exports.signup = signup;
 const signin = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({
-      message: "need email and password"
+      message: 'need email and password'
     });
   }
 
   const invalid = {
-    message: "Invalid email and passoword combination"
+    message: 'Invalid email and passoword combination'
   };
 
   try {
     const user = await _user.User.findOne({
       email: req.body.email
-    }).select("email password").exec();
+    }).select('email password').exec();
 
     if (!user) {
       return res.status(401).send(invalid);
@@ -93,11 +93,11 @@ exports.signin = signin;
 const protect = async (req, res, next) => {
   const bearer = req.headers.authorization;
 
-  if (!bearer || !bearer.startsWith("Bearer ")) {
+  if (!bearer || !bearer.startsWith('Bearer ')) {
     return res.status(401).end();
   }
 
-  const token = bearer.split("Bearer ")[1].trim();
+  const token = bearer.split('Bearer ')[1].trim();
   let payload;
 
   try {
@@ -106,7 +106,7 @@ const protect = async (req, res, next) => {
     return res.status(401).end();
   }
 
-  const user = await _user.User.findById(payload.id).select("-password").lean().exec();
+  const user = await _user.User.findById(payload.id).select('-password').lean().exec();
 
   if (!user) {
     return res.status(401).end();

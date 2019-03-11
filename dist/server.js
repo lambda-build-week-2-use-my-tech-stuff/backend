@@ -17,17 +17,20 @@ var _cors = _interopRequireDefault(require("cors"));
 
 var _db = require("./utils/db");
 
+var _post = _interopRequireDefault(require("./resources/post/post.router"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const app = (0, _express.default)();
 exports.app = app;
-app.disable("x-powered-by");
+app.disable('x-powered-by');
 app.use((0, _cors.default)());
 app.use((0, _bodyParser.json)());
 app.use((0, _bodyParser.urlencoded)({
   extended: true
 }));
-app.use((0, _morgan.default)("dev"));
+app.use((0, _morgan.default)('dev'));
+app.use('/api/post', _post.default);
 
 const start = async () => {
   try {
