@@ -3,7 +3,7 @@ import { json, urlencoded } from "body-parser";
 import morgan from "morgan";
 import config from "./config";
 import cors from "cors";
-
+import { connect } from "./utils/db";
 export const app = express();
 
 app.disable("x-powered-by");
