@@ -18,11 +18,10 @@ app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
 app.post('/signup', signup)
-app.post('signin', signin)
+app.post('/signin', signin)
 
-app.use('/api', protect)
 app.use('/api/post', postRouter)
-app.use('api/user', userRouter)
+app.use('/api/user', userRouter)
 
 export const start = async () => {
   try {

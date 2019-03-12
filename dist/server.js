@@ -35,10 +35,9 @@ app.use((0, _bodyParser.urlencoded)({
 }));
 app.use((0, _morgan.default)('dev'));
 app.post('/signup', _auth.signup);
-app.post('signin', _auth.signin);
-app.use('/api', _auth.protect);
+app.post('/signin', _auth.signin);
 app.use('/api/post', _post.default);
-app.use('api/user', _user.default);
+app.use('/api/user', _user.default);
 
 const start = async () => {
   try {

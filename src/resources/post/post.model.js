@@ -19,11 +19,12 @@ const postSchema = new mongoose.Schema(
     category: { type: String },
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'user',
-      required: true
+      ref: 'user'
     }
   },
   { timestamps: true }
 )
+
+postSchema.index({ postTitle: 1, state: 1 }, { unique: false })
 
 export const Post = mongoose.model('post', postSchema)
