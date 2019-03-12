@@ -2,3 +2,4 @@
 node_modules/
 #closed d
 .env
+dev.js
