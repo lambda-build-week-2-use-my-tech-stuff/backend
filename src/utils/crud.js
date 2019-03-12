@@ -1,7 +1,8 @@
 export const getOne = model => async (req, res) => {
   try {
+    const postId = req.params.id
     const doc = await model
-      .findOne({ createdBy: req.user._id, _id: req.params.id })
+      .findById(postId)
       .lean()
       .exec()
 
@@ -43,15 +44,8 @@ export const createOne = model => async (req, res) => {
 export const updateOne = model => async (req, res) => {
   try {
     const updatedDoc = await model
-      .findOneAndUpdate(
-        {
-          createdBy: req.user._id,
-          _id: req.params.id
-        },
-        req.body,
-        { new: true }
-      )
-      .lean()
+      .findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+
       .exec()
 
     if (!updatedDoc) {
@@ -67,10 +61,7 @@ export const updateOne = model => async (req, res) => {
 
 export const removeOne = model => async (req, res) => {
   try {
-    const removed = await model.findOneAndRemove({
-      createdBy: req.user._id,
-      _id: req.params.id
-    })
+    const removed = await model.findByIdAndRemove(req.params.id)
 
     if (!removed) {
       return res.status(400).end()

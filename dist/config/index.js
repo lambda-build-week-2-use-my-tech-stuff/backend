@@ -7,12 +7,14 @@ exports.default = void 0;
 
 var _lodash = require("lodash");
 
+require('dotenv').config();
+
 const env = process.env.NODE_ENV || 'development';
 const baseConfig = {
   env,
   isDev: env === 'development',
   isTest: env === 'testing',
-  port: 3001,
+  port: process.env.PORT,
   secrets: {
     jwt: process.env.JWT_SECRET,
     jwtExp: '100d'
