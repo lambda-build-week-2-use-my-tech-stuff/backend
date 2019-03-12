@@ -11,10 +11,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 const getOne = model => async (req, res) => {
   try {
-    const doc = await model.findOne({
-      createdBy: req.user._id,
-      _id: req.params.id
-    }).lean().exec();
+    const postId = req.params.id;
+    const doc = await model.findById(postId).lean().exec();
 
     if (!doc) {
       return res.status(400).end();
@@ -63,12 +61,11 @@ exports.createOne = createOne;
 
 const updateOne = model => async (req, res) => {
   try {
-    const updatedDoc = await model.findOneAndUpdate({
-      createdBy: req.user._id,
-      _id: req.params.id
-    }, req.body, {
+    const updatedDoc = await model.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+    }, {
       new: true
-    }).lean().exec();
+    }).exec();
 
     if (!updatedDoc) {
       return res.status(400).end();
@@ -87,10 +84,7 @@ exports.updateOne = updateOne;
 
 const removeOne = model => async (req, res) => {
   try {
-    const removed = await model.findOneAndRemove({
-      createdBy: req.user._id,
-      _id: req.params.id
-    });
+    const removed = await model.findByIdAndRemove(req.params.id);
 
     if (!removed) {
       return res.status(400).end();

@@ -27,6 +27,16 @@ router.route('/').get(async (req, res) => {
   }
 }).post(_post.default.createOne); // /api/post/:id
 
-router.route('/:id').get(_post.default.getOne).put(_post.default.updateOne).put(_post.default.updateOne).delete(_post.default.removeOne);
+router.route('/:id').get(async (req, res) => {
+  try {
+    const docs = await _post2.Post.findById(req.params.id).lean().exec();
+    res.status(200).json({
+      data: docs
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(400).end();
+  }
+}).put(_post.default.updateOne).delete(_post.default.removeOne);
 var _default = router;
 exports.default = _default;

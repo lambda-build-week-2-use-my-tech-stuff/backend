@@ -43,7 +43,7 @@ const start = async () => {
   try {
     await (0, _db.connect)();
     app.listen(_config.default.port, () => {
-      console.log(`REST API on http://localhost:${_config.default.port}/api`);
+      console.log(`REST API on port ${_config.default.port}`);
     });
   } catch (e) {
     console.error(e);

@@ -24,9 +24,20 @@ router
 // /api/post/:id
 router
   .route('/:id')
-  .get(controllers.getOne)
+  .get(async (req, res) => {
+    try {
+      const docs = await Post.findById(req.params.id)
+        .lean()
+        .exec()
+
+      res.status(200).json({ data: docs })
+    } catch (e) {
+      console.error(e)
+      res.status(400).end()
+    }
+  })
   .put(controllers.updateOne)
-  .put(controllers.updateOne)
+
   .delete(controllers.removeOne)
 
 export default router
