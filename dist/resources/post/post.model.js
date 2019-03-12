@@ -33,11 +33,16 @@ const postSchema = new _mongoose.default.Schema({
   },
   createdBy: {
     type: _mongoose.default.SchemaTypes.ObjectId,
-    ref: 'user',
-    required: true
+    ref: 'user'
   }
 }, {
   timestamps: true
+});
+postSchema.index({
+  postTitle: 1,
+  state: 1
+}, {
+  unique: false
 });
 
 const Post = _mongoose.default.model('post', postSchema);

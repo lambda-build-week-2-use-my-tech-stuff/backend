@@ -48,12 +48,8 @@ const getMany = model => async (req, res) => {
 exports.getMany = getMany;
 
 const createOne = model => async (req, res) => {
-  const createdBy = req.user._id;
-
   try {
-    const doc = await model.create(_objectSpread({}, req.body, {
-      createdBy
-    }));
+    const doc = await model.create(_objectSpread({}, req.body));
     res.status(201).json({
       data: doc
     });

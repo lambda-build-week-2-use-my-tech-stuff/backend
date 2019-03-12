@@ -4,10 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.config = void 0;
+
+require('dotenv').config();
+
 const config = {
   secrets: {
-    jwt: "learneverything"
+    jwt: 'learneverything'
   },
-  dbUrl: "mongodb://localhost:27017/api-design"
+  dbUrl: `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0-rrbed.mongodb.net/use-tech-stuff?retryWrites=true`
 };
 exports.config = config;
