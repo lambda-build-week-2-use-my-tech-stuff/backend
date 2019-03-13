@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const config = {
   secrets: {
-    jwt: 'learneverything'
+    jwt: `${process.env.SECRET}`
   },
   dbUrl: `${process.env.DB_CONFIG}`
 };
