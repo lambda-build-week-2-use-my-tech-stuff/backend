@@ -9,8 +9,8 @@ require('dotenv').config();
 
 const config = {
   secrets: {
-    jwt: 'learneverything'
+    jwt: `${process.env.SECRET}`
   },
-  dbUrl: `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0-rrbed.mongodb.net/use-tech-stuff?retryWrites=true`
+  dbUrl: `${process.env.DB_CONFIG}`
 };
 exports.config = config;
