@@ -41,9 +41,11 @@ const signup = async (req, res) => {
 
   try {
     const user = await _user.User.create(req.body);
+    const userId = await user.id;
     const token = newToken(user);
     return res.status(201).send({
-      token
+      token,
+      userId
     });
   } catch (e) {
     return res.status(500).end();
@@ -67,6 +69,7 @@ const signin = async (req, res) => {
     const user = await _user.User.findOne({
       email: req.body.email
     }).select('email password').exec();
+    const userId = await user.id;
 
     if (!user) {
       return res.status(401).send(invalid);
@@ -80,7 +83,8 @@ const signin = async (req, res) => {
 
     const token = newToken(user);
     return res.status(201).send({
-      token
+      token,
+      userId
     });
   } catch (e) {
     console.error(e);

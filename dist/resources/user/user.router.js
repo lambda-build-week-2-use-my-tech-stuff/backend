@@ -22,7 +22,6 @@ router.route('/:id').get(async (req, res) => {
     console.error(e);
     res.status(400).end();
   }
-});
-router.put('/', _user.updateMe);
+}).put(_user.updateMe);
 var _default = router;
 exports.default = _default;

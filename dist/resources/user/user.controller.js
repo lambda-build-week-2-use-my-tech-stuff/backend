@@ -18,7 +18,7 @@ exports.me = me;
 
 const updateMe = async (req, res) => {
   try {
-    const user = await _user.User.findByIdAndUpdate(req.user._id, req.body, {
+    const user = await _user.User.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     }).lean().exec();
     res.status(200).json({
