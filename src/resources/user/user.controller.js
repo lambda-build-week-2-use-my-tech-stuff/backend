@@ -1,7 +1,11 @@
 import { User } from './user.model'
 
-export const me = (req, res) => {
-  res.status(200).json({ data: req.user })
+export const me = async (req, res) => {
+  const user = await User.findById(req.params.id)
+    .lean()
+    .exec()
+
+  res.status(200).json({ data: user })
 }
 
 export const updateMe = async (req, res) => {

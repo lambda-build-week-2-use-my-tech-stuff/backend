@@ -7,9 +7,10 @@ exports.updateMe = exports.me = void 0;
 
 var _user = require("./user.model");
 
-const me = (req, res) => {
+const me = async (req, res) => {
+  const user = await _user.User.findById(req.params.id).lean().exec();
   res.status(200).json({
-    data: req.user
+    data: user
   });
 };
 
