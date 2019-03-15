@@ -15,6 +15,7 @@ const postSchema = new mongoose.Schema(
     price: {
       type: String
     },
+    postImage: { type: String },
     description: { type: String },
     category: { type: String },
     createdBy: {
