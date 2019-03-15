@@ -3,31 +3,31 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateMe = exports.me = void 0;
+exports.default = void 0;
 
 var _user = require("./user.model");
 
-const me = async (req, res) => {
-  const user = await _user.User.findById(req.params.id).lean().exec();
-  res.status(200).json({
-    data: user
-  });
-};
+var _crud = require("../../utils/crud");
 
-exports.me = me;
+// export const me = async (req, res) => {
+//   const user = await User.findById(req.params.id)
+//     .lean()
+//     .exec()
+//   res.status(200).json({ data: user })
+// }
+// export const updateMe = async (req, res) => {
+//   try {
+//     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true
+//     })
+//       .lean()
+//       .exec()
+//     res.status(200).json({ data: user })
+//   } catch (e) {
+//     console.error(e)
+//     res.status(400).end()
+//   }
+// }
+var _default = (0, _crud.crudControllers)(_user.User);
 
-const updateMe = async (req, res) => {
-  try {
-    const user = await _user.User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true
-    }).lean().exec();
-    res.status(200).json({
-      data: user
-    });
-  } catch (e) {
-    console.error(e);
-    res.status(400).end();
-  }
-};
-
-exports.updateMe = updateMe;
+exports.default = _default;

@@ -1,8 +1,8 @@
 export const getOne = model => async (req, res) => {
   try {
-    const postId = req.params.id
+    const id = req.params.id
     const doc = await model
-      .findById(postId)
+      .findById(id)
       .lean()
       .exec()
 
@@ -20,7 +20,7 @@ export const getOne = model => async (req, res) => {
 export const getMany = model => async (req, res) => {
   try {
     const docs = await model
-      .find({ createdBy: req.user._id })
+      .find({})
       .lean()
       .exec()
 
