@@ -11,8 +11,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 const getOne = model => async (req, res) => {
   try {
-    const postId = req.params.id;
-    const doc = await model.findById(postId).lean().exec();
+    const id = req.params.id;
+    const doc = await model.findById(id).lean().exec();
 
     if (!doc) {
       return res.status(400).end();
@@ -31,9 +31,7 @@ exports.getOne = getOne;
 
 const getMany = model => async (req, res) => {
   try {
-    const docs = await model.find({
-      createdBy: req.user._id
-    }).lean().exec();
+    const docs = await model.find({}).lean().exec();
     res.status(200).json({
       data: docs
     });
